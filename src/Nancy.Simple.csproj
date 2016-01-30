@@ -70,16 +70,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="AfterFlopAnalyse.cs" />
-=======
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\GameState.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Data\PlayerStatus.cs" />
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
->>>>>>> d6e8e841d9042dbd5f61a8a1fdaa3634af0accb3
     <Compile Include="Decisions.cs" />
     <Compile Include="Randomness.cs" />
     <Compile Include="TwoPair.cs" />

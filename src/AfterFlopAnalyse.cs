@@ -9,29 +9,24 @@ namespace Nancy.Simple
 {
     class AfterFlopAnalyse : IDecisionLogic
     {
-        public int? MakeADecision(JObject gameState)
+        public int? MakeADecision(GameState gameState)
         {
-            //Dictionary a figurás lapok számértékéhez
-            Dictionary<string, int> cardValues = new Dictionary<string, int>()
-            { 
-            {"2", 2}, {"3", 3}, {"4", 4},
-            {"5", 5}, {"6", 6}, {"7", 7},
-            {"8", 8}, {"9", 9}, {"10", 10},
-            {"J", 11}, {"Q", 12}, {"K", 13},
-            {"A", 14}
-            };
+            //csak, ha már vannak terített lapok
+            if (gameState.CommunityCards.FirstOrDefault() == null)
+                return null;
 
             //Van-e magasabb lapom a flopnál?
             bool IsHigherThanFlop = false;
-            int flopMax = 0;
-            foreach (int flopRank in gameState["community_cards"])
+            Rank? flopMax = null;
+            foreach (Card flop in gameState.CommunityCards)
             {
-                if (flopRank > flopMax)
-                    flopMax = flopRank;
+                if (!flopMax.HasValue || flop.Rank > flopMax)
+                    flopMax = flop.Rank;
             }
-            foreach (int ownRank in gameState["players"]["hole_cards"])
+
+            foreach (Card own in gameState.Players.ElementAt(gameState.InAction).HoleCards)
             {
-                if (ownRank > flopMax)
+                if (own.Rank > flopMax)
                     IsHigherThanFlop = true;
             }
 

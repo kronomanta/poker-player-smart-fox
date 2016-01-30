@@ -36,12 +36,12 @@ namespace Nancy.Simple.Decisions
             var tmpCards = new List<Card>();
             foreach (var card in cards)
             {
-                if (tmpCards.Any(c => c.Rank == card.Rank))
+                tmpCards.Add(card);
+
+                if (tmpCards.Count(c => c.Rank == card.Rank) == 2)
                 {
                     return card.Rank;
                 }
-
-                tmpCards.Add(card);
             }
 
             return null;

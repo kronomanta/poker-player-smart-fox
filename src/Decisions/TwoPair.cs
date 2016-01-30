@@ -12,12 +12,10 @@ namespace Nancy.Simple.Decisions
 
         public override int? MakeADecision(GameState gameState)
         {
-            var allCards = GetAllCardOnTable(gameState);
-            var pairs = allCards.GroupBy(g => g.Rank).Select(group => group.Key).ToArray();
-            //if (pairs.Count() == 2)
-            //{
-            //    pairs.Rank
-            //}
+            if (gameState.GetPairs().Count() == 2)
+            {
+                return 10000;
+            }
 
             return null;
         }

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using Nancy.Simple.Interface;
-using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
 {
@@ -8,17 +8,26 @@ namespace Nancy.Simple
     {
         private readonly Random rnd = new Random();
 
+        private const int CallThreshold = 100;
+
         /// <summary>
         /// Mindig ad vissza valamit
         /// </summary>
         /// <param name="gameState"></param>
         /// <returns></returns>
-        public int? MakeADecision(JObject gameState)
+        public int? MakeADecision(GameState gameState)
         {
-            int bet = 0;
-            int playerInAction = (int)gameState["in_action"];
-            int valueToCall = (int)gameState["current_buy_in"] - (int)gameState["players"][playerInAction]["bet"];
+            int? bet = null;
 
+            Player player = gameState.Players.ElementAt(gameState.InAction);
+
+            int valueToCall = gameState.CurrentBuyIn - player.Bet;
+
+            //túl nagyot nem emelünk
+            if (valueToCall > CallThreshold)
+                return null;
+
+            
             int decision = rnd.Next(100);
             if (decision < 20)
             {
@@ -33,8 +42,14 @@ namespace Nancy.Simple
             else
             {
                 //25%
-                int raise = (int)gameState["minimum_raise"];
+                int raise = gameState.MinimumRaise;
+
                 bet = valueToCall + raise;
+                if (bet >= CallThreshold)
+                {
+                    //ha all in lenne belőle, akkor inkább bedobjuk
+                    bet = 0;
+                }
             }
 
             return bet;

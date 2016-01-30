@@ -9,6 +9,6 @@ namespace Nancy.Simple.Interface
         /// </summary>
         /// <param name="gameState"></param>
         /// <returns></returns>
-        int? MakeADecision(JObject gameState);
+        int? MakeADecision(GameState gameState);
     }
 }

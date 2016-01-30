@@ -1,5 +1,6 @@
 ﻿using System;
 using Nancy.Simple.Interface;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
@@ -13,7 +14,6 @@ namespace Nancy.Simple
 	        return (requestId = Guid.NewGuid());
 	    }
 
-
 		public static readonly string VERSION = "Default C# folding player";
 
 		public static int BetRequest(JObject gameState)
@@ -21,25 +21,26 @@ namespace Nancy.Simple
 		    int bet = 0;
             try
             {
+                var parsedState = JsonConvert.DeserializeObject<GameState>(gameState.ToString());
+
                 foreach (IDecisionLogic decisionLogic in Decisions.GetDecisions())
                 {
                     //végigpróbáljuk a lehetőségeket
-                    int? possibleBet = decisionLogic.MakeADecision(gameState);
+                    int? possibleBet = decisionLogic.MakeADecision(parsedState);
                     if (possibleBet.HasValue)
                     {
-                        bet = possibleBet.Value;
-                        break;
+                            bet = possibleBet.Value;
+                            break;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("ReqID: {0}, error: {1}",requestId, ex);
+                Logger.LogHelper.Error("type=error action=bet_request request_id={0} error_message={1}",requestId, ex);
             }
 
-            Console.WriteLine("ReqID: {0}, Bet: {1}", requestId, bet);
+            Logger.LogHelper.Log("type=bet action=bet_request request_id={0} bet={1}", requestId, bet);
             
-
             return bet;
 		}
 
@@ -52,7 +53,7 @@ namespace Nancy.Simple
 		    }
 		    catch (Exception ex)
 		    {
-		        Console.Error.WriteLine(ex);
+                Logger.LogHelper.Error("type=error action=showdown error_message={1} request_id={0}", requestId, ex);
 		    }
 		}
 	}

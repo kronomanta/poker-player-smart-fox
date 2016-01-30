@@ -74,6 +74,10 @@
     <Compile Include="Data\GameState.cs" />
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
+    <Compile Include="Decisions.cs" />
+    <Compile Include="Randomness.cs" />
+    <Compile Include="TwoPair.cs" />
+    <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Data\Player.cs" />
@@ -91,6 +95,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -20,6 +20,9 @@ namespace Nancy.Simple
 			Post ["/"] = parameters => {
 				var form = Request.Form;
 				string action = form ["action"];
+                Guid reqId = PokerPlayer.GenerateRequestId();
+                Console.WriteLine("Incoming Request: aciton: {0}, reqId: {1}", action, reqId);
+
 				switch (action) {
 				case "bet_request":
 				{

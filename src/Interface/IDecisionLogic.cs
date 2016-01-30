@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Nancy.Simple.Interface
+﻿namespace Nancy.Simple.Interface
 {
     public interface IDecisionLogic
     {

@@ -10,10 +10,11 @@ namespace Nancy.Simple.Decisions
 				new BetOnCertainty (),
                 new PairBeforeFlop(),
                 new HighCardAfterFlop (),
+                new Pair(), 
 				new DontRisk (), 
 				new TwoPair (), 
 				new RandomBet ()
-			};
+            };
 
             return decisions;
         }

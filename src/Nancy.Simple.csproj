@@ -75,7 +75,12 @@
     <Compile Include="Data\PlayerStatus.cs" />
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
+<<<<<<< HEAD
     <Compile Include="Decisions\PairBeforeFlop.cs" />
+=======
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Decisions\Pair.cs" />
+>>>>>>> fdbf2af6f05b1e21ce123adbe03fe8aa4b387513
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />

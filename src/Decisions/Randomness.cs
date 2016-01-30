@@ -26,11 +26,6 @@ namespace Nancy.Simple.Decisions
 
             int valueToCall = gameState.GetValueToCall();
 
-            //túl nagyot nem emelünk
-            if (valueToCall > CallThreshold)
-                return null;
-
-            
             int decision = rnd.Next(100);
             if (decision < 20)
             {

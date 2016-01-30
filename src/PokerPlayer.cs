@@ -1,4 +1,5 @@
 ﻿using System;
+using Nancy.Simple.Interface;
 using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
@@ -12,7 +13,6 @@ namespace Nancy.Simple
 	        return (requestId = Guid.NewGuid());
 	    }
 
-        private static readonly Random rnd = new Random();
 
 		public static readonly string VERSION = "Default C# folding player";
 
@@ -21,34 +21,23 @@ namespace Nancy.Simple
 		    int bet = 0;
             try
             {
-                int playerInAction = (int) gameState["in_action"];
-                int valueToCall = (int)gameState["current_buy_in"] - (int)gameState["players"][playerInAction]["bet"];
-
-                int decision = rnd.Next(10);
-                if (decision < 5)
+                foreach (IDecisionLogic decisionLogic in Decisions.GetDecisions())
                 {
-                    //50% tartom
-                    bet = valueToCall;
-                }else if (decision < 8)
-                {
-                    //30% eldob
-                    bet = 0;
-                }else if (decision < 9)
-                {
-                    int raise = (int)gameState["minimum_raise"];
-                    bet = valueToCall + raise;
-                }
-                else
-                {
-                    bet = 1000000;                    
+                    //végigpróbáljuk a lehetőségeket
+                    int? possibleBet = decisionLogic.MakeADecision(gameState);
+                    if (possibleBet.HasValue)
+                    {
+                        bet = possibleBet.Value;
+                        break;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("ReqID: {0}, error: {1}",requestId, ex);
+                Logger.LogHelper.Error("type=error action=bet_request request_id={0} error_message={1}",requestId, ex);
             }
 
-            Console.WriteLine("ReqID: {0}, Bet: {1}", requestId, bet);
+            Logger.LogHelper.Log("type=bet action=bet_request request_id={0} bet={1}", requestId, bet);
             
 
             return bet;
@@ -63,7 +52,7 @@ namespace Nancy.Simple
 		    }
 		    catch (Exception ex)
 		    {
-		        Console.Error.WriteLine(ex);
+                Logger.LogHelper.Error("type=error action=showdown error_message={1} request_id={0}", requestId, ex);
 		    }
 		}
 	}

@@ -73,11 +73,13 @@
     <Compile Include="Decisions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="HighCard.cs" />
+    <Compile Include="Randomness.cs" />
     <Compile Include="TwoPair.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="PokerPlayer.cs" />
+    <Compile Include="Logger\LogHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -99,4 +101,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Logger\" />
+  </ItemGroup>
 </Project>

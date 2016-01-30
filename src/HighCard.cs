@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Nancy.Simple.Interface;
 using Newtonsoft.Json.Linq;
 
@@ -7,60 +6,71 @@ namespace Nancy.Simple
 {
     public class HighCard : IDecisionLogic
     {
-        public bool MakeADecision(JObject jObj)
+        private readonly Dictionary<string, int> _cardTypes = new Dictionary<string, int>
         {
-            var me = jObj["in_action"];
+            { "A", 14},
+            { "K", 13},
+            { "Q", 12},
+            { "J", 11}
+        };
 
+        public int? MakeADecision(JObject jObj)
+        {
+            string highCard = "";
+            int playerInAction = (int)jObj["in_action"];
             foreach (var player in jObj["players"])
             {
-                if (player["id"] == me)
+                if ((int)player["id"] == playerInAction)
                 {
-                    return HasHighCardOrPair(player["hole_cards"]);
-                }
-            }
-
-            return false;
-        }
-
-        private bool HasAPair(JToken cards)
-        {
-            var haveAPair = false;
-            var tmpCards = new List<JToken>();
-            foreach (var card in cards)
-            {
-                if (!tmpCards.Any())
-                {
-                    tmpCards.Add(card);
-                    continue;
-                }
-
-                if (tmpCards.Any(c => c["rank"] == card["rank"]))
-                {
-                    haveAPair = true;
+                    highCard = GetHighCard(player["hole_cards"]);
                     break;
                 }
             }
 
-            return haveAPair;
+            return GetBet(highCard);
         }
 
-        private bool HasHighCardOrPair(JToken cards)
+        private int? GetBet(string highCard)
         {
-            var hasHighCard = false;
+            switch (highCard)
+            {
+                case "A":
+                    return 100;
 
+                case "K":
+                    return 60;
+
+                case "Q":
+                    return 20;
+
+                case "J":
+                    return 10;
+
+                default:
+                    return null;
+
+            }
+        }
+
+        private string GetHighCard(JToken cards)
+        {
+            var lastCardValue = 0;
+            var highCard = "";
             foreach (var card in cards)
             {
-
-
-                //if (card["rank"] > 8)
-                //{
-                //    hasHighCard = true;
-                //    break;
-                //}
+                var cardType = card["rank"].ToString();
+                if (_cardTypes.ContainsKey(cardType))
+                {
+                    var currentCardValue = _cardTypes[cardType];
+                    if (lastCardValue < currentCardValue)
+                    {
+                        lastCardValue = _cardTypes[cardType];
+                        highCard = cardType;
+                    }
+                }
             }
 
-
-            return hasHighCard;
+            return highCard;
         }
     }
 }

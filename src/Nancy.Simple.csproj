@@ -68,7 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterFlopAnalyse.cs" />
+    <Compile Include="Decisions\HighCardAfterFlop.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\GameState.cs" />
     <Compile Include="Data\Player.cs" />
@@ -107,7 +107,5 @@
   </Target>
   -->
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Decisions\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

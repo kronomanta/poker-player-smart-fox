@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nancy.Simple
@@ -81,6 +82,20 @@ namespace Nancy.Simple
         public bool HasPair()
         {
             return _hasPair ?? (_hasPair = CardsByRank.Any(group => group.Count() == 2)).Value;
+        }
+
+        public Player GetCurrentPlayer()
+        {
+            return Players.ElementAt(InAction);
+        }
+
+        /// <summary>
+        /// Minimális összeg ahhoz, hogy tartsuk a tétet
+        /// </summary>
+        /// <returns></returns>
+        public int GetValueToCall()
+        {
+            return CurrentBuyIn - GetCurrentPlayer().Bet;
         }
     }
 }

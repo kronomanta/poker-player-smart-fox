@@ -7,8 +7,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
 {
-    class AfterFlopAnalyse : IDecisionLogic
+    class HighCardAfterFlop : IDecisionLogic
     {
+        public string GetName()
+        {
+            return "AfterFlopAnalyse";
+        }
+
         public int? MakeADecision(GameState gameState)
         {
             //csak, ha már vannak terített lapok
@@ -17,23 +22,26 @@ namespace Nancy.Simple
 
             //Van-e magasabb lapom a flopnál?
             bool IsHigherThanFlop = false;
-            Rank? flopMax = null;
+            Rank flopMax = Rank.Number2;
             foreach (Card flop in gameState.CommunityCards)
             {
-                if (!flopMax.HasValue || flop.Rank > flopMax)
+                if (flop.Rank > flopMax)
                     flopMax = flop.Rank;
             }
 
             foreach (Card own in gameState.Players.ElementAt(gameState.InAction).HoleCards)
             {
                 if (own.Rank > flopMax)
+                {
                     IsHigherThanFlop = true;
+                    break;
+                }
             }
 
 
             //sosem játszik, nem tartozik még hozzá logika
             if (IsHigherThanFlop == true)
-                return 1;
+                return 200;
             else
                 return null;
 

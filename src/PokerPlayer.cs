@@ -14,18 +14,35 @@ namespace Nancy.Simple
 		    int bet = 0;
             try
             {
-                int valueToCall = (int)gameState["current_buy_in"] - (int)gameState["players"][(int)gameState["in_action"]]["bet"];
+                int playerInAction = (int) gameState["in_action"];
+                int valueToCall = (int)gameState["current_buy_in"] - (int)gameState["players"][playerInAction]["bet"];
 
-                //50% eséllyel csak tartjuk a tétet, egyébként pedig all in :D 
-                bet = rnd.Next(1) == 1 ? valueToCall : 1000000;
-                
+                int decision = rnd.Next(10);
+                if (decision < 5)
+                {
+                    //50% tartom
+                    bet = valueToCall;
+                }else if (decision < 8)
+                {
+                    //30% eldob
+                    bet = 0;
+                }else if (decision < 9)
+                {
+                    int raise = (int)gameState["minimum_raise"];
+                    bet = valueToCall + raise;
+                }
+                else
+                {
+                    bet = 1000000;                    
+                }
             }
             catch (Exception ex)
             {
+                Console.Error.WriteLine(ex);
             }
 
             Console.WriteLine("Bet: {0}", bet);
-            Console.Error.WriteLine("Bet (error): {0}", bet);
+            
 
             return bet;
 		}
@@ -33,6 +50,14 @@ namespace Nancy.Simple
 		public static void ShowDown(JObject gameState)
 		{
 			//TODO: Use this method to showdown
+		    try
+		    {
+
+		    }
+		    catch (Exception ex)
+		    {
+		        Console.Error.WriteLine(ex);
+		    }
 		}
 	}
 }

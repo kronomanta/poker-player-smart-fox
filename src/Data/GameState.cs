@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -24,7 +23,7 @@ namespace Nancy.Simple
         public int SmallBlind { get; set; }
 
         [JsonProperty("current_buy_in")]
-        public  int CurrentBuyIn { get; set; }
+        public int CurrentBuyIn { get; set; }
 
         [JsonProperty("pot")]
         public int Pot { get; set; }
@@ -48,13 +47,10 @@ namespace Nancy.Simple
         public IEnumerable<Card> CommunityCards { get; set; }
 
         private Player _me;
-        
-        public Player Me
+
+        public Player GetCurrentPlayer()
         {
-            get
-            {
-                return _me ?? (_me = Players.ElementAt(InAction));
-            }
+            return _me ?? (_me = Players.ElementAt(InAction));
         }
 
         private IEnumerable<Card> _ownCards;
@@ -63,12 +59,12 @@ namespace Nancy.Simple
         {
             get
             {
-                return _ownCards ?? (_ownCards = CommunityCards.Concat(Me.HoleCards));
+                return _ownCards ?? (_ownCards = CommunityCards.Concat(GetCurrentPlayer().HoleCards));
             }
         }
 
         private IEnumerable<IGrouping<Rank, Card>> _cardsByRank;
-        
+
         public IEnumerable<IGrouping<Rank, Card>> CardsByRank
         {
             get
@@ -76,7 +72,7 @@ namespace Nancy.Simple
                 return _cardsByRank ?? (_cardsByRank = OwnCards.GroupBy(card => card.Rank));
             }
         }
-        
+
         private bool? _hasPair;
 
         public bool HasPair()
@@ -84,9 +80,18 @@ namespace Nancy.Simple
             return _hasPair ?? (_hasPair = CardsByRank.Any(group => group.Count() == 2)).Value;
         }
 
-        public Player GetCurrentPlayer()
+        private bool? _hasThreeOfAKind;
+
+        public bool HasThreeOfAKind()
         {
-            return Players.ElementAt(InAction);
+            return _hasThreeOfAKind ?? (_hasThreeOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
+        }
+
+        private bool? _hasFourOfAKind;
+
+        public bool HasFourOfAKind()
+        {
+            return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
         }
 
         /// <summary>

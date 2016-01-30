@@ -12,14 +12,8 @@ namespace Nancy.Simple.Decisions
 
         public int? MakeADecision(GameState gameState)
         {
-            var me = gameState.Players.ElementAt(gameState.InAction);
-            var cards = me.HoleCards.Concat(gameState.CommunityCards).ToArray();
-            var matchingRankGroups = cards.GroupBy(card => card.Rank)
-                .Select(group => group.Count())
-                .ToArray();
-
-            if (matchingRankGroups.Contains(4)
-                || matchingRankGroups.Contains(3) && matchingRankGroups.Contains(2))
+            if (gameState.HasFourOfAKind()
+                || gameState.HasPair() && gameState.HasThreeOfAKind())
             {
                 return 100000;
             }

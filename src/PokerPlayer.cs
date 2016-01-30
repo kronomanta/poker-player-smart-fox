@@ -55,7 +55,8 @@ namespace Nancy.Simple
 			//TODO: Use this method to showdown
 		    try
 		    {
-
+				Logger.LogHelper.Log("type=showdown action=showdown request_id={0} game_id={1} stack={}",
+					requestId, gameState.GameId, gameState.GetCurrentPlayer().Stack);
 		    }
 		    catch (Exception ex)
 		    {

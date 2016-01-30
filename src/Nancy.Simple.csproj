@@ -77,7 +77,6 @@
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
     <Compile Include="Decisions.cs" />
-    <Compile Include="JSON\GameStateManager.cs" />
     <Compile Include="Randomness.cs" />
     <Compile Include="TwoPair.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />

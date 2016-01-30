@@ -19,17 +19,19 @@ namespace Nancy.Simple
 		public static int BetRequest(JObject gameState)
 		{
 		    int bet = 0;
+			string actualDecision = "none";
             try
             {
                 var parsedState = JsonConvert.DeserializeObject<GameState>(gameState.ToString());
 
-                foreach (IDecisionLogic decisionLogic in Decisions.GetDecisions())
+				foreach (IDecisionLogic decisionLogic in Decisions.DecisionFactory.GetDecisions())
                 {
                     //végigpróbáljuk a lehetőségeket
                     int? possibleBet = decisionLogic.MakeADecision(parsedState);
                     if (possibleBet.HasValue)
                     {
                         bet = possibleBet.Value;
+						actualDecision = decisionLogic.GetName();
                         break;
                     }
                 }
@@ -39,7 +41,7 @@ namespace Nancy.Simple
                 Logger.LogHelper.Error("type=error action=bet_request request_id={0} error_message={1}",requestId, ex);
             }
 
-            Logger.LogHelper.Log("type=bet action=bet_request request_id={0} bet={1}", requestId, bet);
+			Logger.LogHelper.Log("type=bet action=bet_request request_id={0} bet={1} decision={2}", requestId, bet, actualDecision);
             
             return bet;
 		}

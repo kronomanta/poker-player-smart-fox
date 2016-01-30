@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nancy.Simple
@@ -44,5 +45,19 @@ namespace Nancy.Simple
 
         [JsonProperty("community_cards")]
         public IEnumerable<Card> CommunityCards { get; set; }
+
+        public Player GetCurrentPlayer()
+        {
+            return Players.ElementAt(InAction);
+        }
+
+        /// <summary>
+        /// Minimális összeg ahhoz, hogy tartsuk a tétet
+        /// </summary>
+        /// <returns></returns>
+        public int GetValueToCall()
+        {
+            return CurrentBuyIn - GetCurrentPlayer().Bet;
+        }
     }
 }

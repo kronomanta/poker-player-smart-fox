@@ -8,5 +8,11 @@
         /// <param name="gameState"></param>
         /// <returns></returns>
         int? MakeADecision(GameState gameState);
+
+        /// <summary>
+        /// Adott implementáció neve
+        /// </summary>
+        /// <returns></returns>
+        string GetName();
     }
 }

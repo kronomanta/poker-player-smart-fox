@@ -2,13 +2,18 @@
 using System.Linq;
 using Nancy.Simple.Interface;
 
-namespace Nancy.Simple
+namespace Nancy.Simple.Decisions
 {
     public class RandomBet : IDecisionLogic
     {
         private readonly Random rnd = new Random();
 
         private const int CallThreshold = 100;
+
+        public string GetName()
+        {
+            return "RandomBet";
+        }
 
         /// <summary>
         /// Mindig ad vissza valamit
@@ -19,9 +24,7 @@ namespace Nancy.Simple
         {
             int? bet = null;
 
-            Player player = gameState.Players.ElementAt(gameState.InAction);
-
-            int valueToCall = gameState.CurrentBuyIn - player.Bet;
+            int valueToCall = gameState.GetValueToCall();
 
             //túl nagyot nem emelünk
             if (valueToCall > CallThreshold)

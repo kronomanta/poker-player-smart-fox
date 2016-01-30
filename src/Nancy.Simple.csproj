@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0B3EA40E-F7D8-4E14-A30F-1536F41B62D1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -70,24 +68,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterFlopAnalyse.cs" />
-    <Compile Include="BetOnCertainty.cs" />
+    <Compile Include="Decisions\HighCardAfterFlop.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\GameState.cs" />
     <Compile Include="Data\Player.cs" />
     <Compile Include="Data\PlayerStatus.cs" />
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
-    <Compile Include="Decisions.cs" />
     <Compile Include="Helpers.cs" />
-    <Compile Include="Pair.cs" />
-    <Compile Include="Randomness.cs" />
-    <Compile Include="TwoPair.cs" />
+    <Compile Include="Decisions\Pair.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />
     <Compile Include="PokerPlayer.cs" />
     <Compile Include="Logger\LogHelper.cs" />
+    <Compile Include="Decisions\DecisionFactory.cs" />
+    <Compile Include="Decisions\DontRisk.cs" />
+    <Compile Include="Decisions\BetOnCertainty.cs" />
+    <Compile Include="Decisions\TwoPair.cs" />
+    <Compile Include="Decisions\Randomness.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -109,5 +108,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup />
   <ItemGroup />
 </Project>

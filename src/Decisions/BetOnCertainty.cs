@@ -1,10 +1,15 @@
 ﻿using System.Linq;
 using Nancy.Simple.Interface;
 
-namespace Nancy.Simple
+namespace Nancy.Simple.Decisions
 {
     public class BetOnCertainty : IDecisionLogic
     {
+        public string GetName()
+        {
+            return "BetOnCertainty";
+        }
+
         public int? MakeADecision(GameState gameState)
         {
             var me = gameState.Players.ElementAt(gameState.InAction);

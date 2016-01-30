@@ -10,6 +10,11 @@ namespace Nancy.Simple
 
         private const int CallThreshold = 100;
 
+        public string GetName()
+        {
+            return "RandomBet";
+        }
+
         /// <summary>
         /// Mindig ad vissza valamit
         /// </summary>
@@ -19,9 +24,7 @@ namespace Nancy.Simple
         {
             int? bet = null;
 
-            Player player = gameState.Players.ElementAt(gameState.InAction);
-
-            int valueToCall = gameState.CurrentBuyIn - player.Bet;
+            int valueToCall = gameState.GetValueToCall();
 
             //túl nagyot nem emelünk
             if (valueToCall > CallThreshold)

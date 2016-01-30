@@ -5,6 +5,11 @@ namespace Nancy.Simple
 {
     class BetOnCertainty : IDecisionLogic
     {
+        public string GetName()
+        {
+            return "BetOnCertainty";
+        }
+
         public int? MakeADecision(GameState gameState)
         {
             var me = gameState.Players.ElementAt(gameState.InAction);

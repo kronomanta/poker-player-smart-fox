@@ -42,8 +42,8 @@ namespace Nancy.Simple
             }
 
 			string cards = String.Join(",", gameState.OwnCards);
-			Logger.LogHelper.Log("type=bet action=bet_request request_id={0} tournament_id={1} bet={2} cards={3} decision={4}",
-				requestId, gameState.TournamentId, bet, cards, actualDecision);
+			Logger.LogHelper.Log("type=bet action=bet_request request_id={0} game_id={1} bet={2} cards={3} decision={4}",
+				requestId, gameState.GameId, bet, cards, actualDecision);
             
             return bet;
 		}

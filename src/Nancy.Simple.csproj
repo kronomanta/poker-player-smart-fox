@@ -75,6 +75,7 @@
     <Compile Include="Data\PlayerStatus.cs" />
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
+    <Compile Include="Decisions\PairBeforeFlop.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />

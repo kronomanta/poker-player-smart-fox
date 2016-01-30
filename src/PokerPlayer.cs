@@ -14,9 +14,10 @@ namespace Nancy.Simple
 		    int valueToCall = (int) gameState["current_buy_in"] - (int) gameState["players"]["in_action"]["bet"];
 
             //50% eséllyel csak tartjuk a tétet, egyébként pedig all in :D 
-		    if (rnd.Next(1) == 1)
-		        return valueToCall;
-			return 1000000;
+		    int bet = rnd.Next(1) == 1 ? valueToCall : 1000000;
+            Console.WriteLine("Bet: {0}", bet);
+		    Console.Error.WriteLine("Bet (error): {0}", bet);
+		    return bet;
 		}
 
 		public static void ShowDown(JObject gameState)

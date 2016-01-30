@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Nancy.Simple.Interface
+﻿namespace Nancy.Simple.Interface
 {
     public interface IDecisionLogic
     {
@@ -9,6 +7,6 @@ namespace Nancy.Simple.Interface
         /// </summary>
         /// <param name="gameState"></param>
         /// <returns></returns>
-        int? MakeADecision(JObject gameState);
+        int? MakeADecision(GameState gameState);
     }
 }

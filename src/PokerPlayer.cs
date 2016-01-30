@@ -26,11 +26,11 @@ namespace Nancy.Simple
                 foreach (IDecisionLogic decisionLogic in Decisions.GetDecisions())
                 {
                     //végigpróbáljuk a lehetőségeket
-                    int? possibleBet = decisionLogic.MakeADecision(gameState);
+                    int? possibleBet = decisionLogic.MakeADecision(parsedState);
                     if (possibleBet.HasValue)
                     {
-                            bet = possibleBet.Value;
-                            break;
+                        bet = possibleBet.Value;
+                        break;
                     }
                 }
             }

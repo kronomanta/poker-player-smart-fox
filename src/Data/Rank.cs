@@ -7,19 +7,19 @@ namespace Nancy.Simple
 {
     public enum Rank
     {
-        Number2,
-        Number3,
-        Number4,
-        Number5,
-        Number6,
-        Number7,
-        Number8,
-        Number9,
-        Number10,
-        Jack,
-        Queen,
-        King,
-        Ace
+        Number2 = 2,
+        Number3 = 3,
+        Number4 = 4,
+        Number5 = 5,
+        Number6 = 6,
+        Number7 = 7,
+        Number8 = 8,
+        Number9 = 9,
+        Number10 = 10,
+        Jack = 11,
+        Queen = 12,
+        King = 13,
+        Ace = 14
     }
 
     class RankConverter : JsonConverter

@@ -1,9 +1,5 @@
 ﻿using Nancy.Simple.Interface;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 
 namespace Nancy.Simple.Decisions
 {
@@ -21,7 +17,7 @@ namespace Nancy.Simple.Decisions
                 {
                     Card[] myCards = gameState.GetCurrentPlayer().HoleCards.ToArray();
                     if (myCards[0].Rank == myCards[1].Rank)
-                        return 10000;
+                        return 300;
                     else return null;
                 }
                 else return null;

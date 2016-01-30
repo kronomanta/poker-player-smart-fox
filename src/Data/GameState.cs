@@ -47,11 +47,11 @@ namespace Nancy.Simple
         public IEnumerable<Card> CommunityCards { get; set; }
 
         private Player _me;
-
+        
         public Player GetCurrentPlayer()
         {
-            return _me ?? (_me = Players.ElementAt(InAction));
-        }
+                return _me ?? (_me = Players.ElementAt(InAction));
+            }
 
         private IEnumerable<Card> _ownCards;
 
@@ -64,7 +64,7 @@ namespace Nancy.Simple
         }
 
         private IEnumerable<IGrouping<Rank, Card>> _cardsByRank;
-
+        
         public IEnumerable<IGrouping<Rank, Card>> CardsByRank
         {
             get
@@ -72,7 +72,7 @@ namespace Nancy.Simple
                 return _cardsByRank ?? (_cardsByRank = OwnCards.GroupBy(card => card.Rank));
             }
         }
-
+        
         private IEnumerable<IGrouping<Suit, Card>> _cardsBySuit;
 
         public IEnumerable<IGrouping<Suit, Card>> CardsBySuit

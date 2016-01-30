@@ -8,6 +8,7 @@ namespace Nancy.Simple
         {
             var decisions = new IDecisionLogic[]
             {
+                new BetOnCertainty(),
                 new TwoPair(), 
                 new RandomBet(), 
             };

@@ -29,8 +29,8 @@ namespace Nancy.Simple
                     int? possibleBet = decisionLogic.MakeADecision(parsedState);
                     if (possibleBet.HasValue)
                     {
-                            bet = possibleBet.Value;
-                            break;
+                        bet = possibleBet.Value;
+                        break;
                     }
                 }
             }

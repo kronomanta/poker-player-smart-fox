@@ -16,18 +16,18 @@ namespace Nancy.Simple
 
 		public static readonly string VERSION = "Default C# folding player";
 
-		public static int BetRequest(JObject gameState)
+		public static int BetRequest(JObject jsonState)
 		{
 		    int bet = 0;
 			string actualDecision = "none";
+			var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
+			var player = gameState.GetCurrentPlayer();
             try
             {
-                var parsedState = JsonConvert.DeserializeObject<GameState>(gameState.ToString());
-
 				foreach (IDecisionLogic decisionLogic in Decisions.DecisionFactory.GetDecisions())
                 {
                     //végigpróbáljuk a lehetőségeket
-                    int? possibleBet = decisionLogic.MakeADecision(parsedState);
+                    int? possibleBet = decisionLogic.MakeADecision(gameState);
                     if (possibleBet.HasValue)
                     {
                         bet = possibleBet.Value;
@@ -41,7 +41,9 @@ namespace Nancy.Simple
                 Logger.LogHelper.Error("type=error action=bet_request request_id={0} error_message={1}",requestId, ex);
             }
 
-			Logger.LogHelper.Log("type=bet action=bet_request request_id={0} bet={1} decision={2}", requestId, bet, actualDecision);
+			string cards = String.Join(",", gameState.OwnCards);
+			Logger.LogHelper.Log("type=bet action=bet_request request_id={0} tournament_id={1} bet={2} cards={3} decision={4}",
+				requestId, gameState.TournamentId, bet, cards, actualDecision);
             
             return bet;
 		}

@@ -9,11 +9,11 @@ namespace Nancy.Simple.Decisions
 			var decisions = new IDecisionLogic[] {
 				new BetOnCertainty (),
                 new PairBeforeFlop(),
-                new DontRisk (), 
+                //new DontRisk (), 
 				new HighCardAfterFlop (),
                 new Pair(), 
 				new TwoPair (), 
-				new RandomBet ()
+				//new RandomBet ()
             };
 
             return decisions;

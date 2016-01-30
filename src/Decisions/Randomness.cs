@@ -9,6 +9,7 @@ namespace Nancy.Simple.Decisions
         private readonly Random rnd = new Random();
 
         private const int CallThreshold = 100;
+        private const int StackLowerThreshold = 300;
 
         public string GetName()
         {
@@ -25,6 +26,10 @@ namespace Nancy.Simple.Decisions
             int? bet = null;
 
             int valueToCall = gameState.GetValueToCall();
+
+            //ha túl kevés a pénz, akkor dobunk mindig
+            if (gameState.GetCurrentPlayer().Stack < StackLowerThreshold)
+                return 0;
 
             int decision = rnd.Next(100);
             if (decision < 20)

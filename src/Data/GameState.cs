@@ -47,11 +47,11 @@ namespace Nancy.Simple
         public IEnumerable<Card> CommunityCards { get; set; }
 
         private Player _me;
-
+        
         public Player GetCurrentPlayer()
         {
-            return _me ?? (_me = Players.ElementAt(InAction));
-        }
+                return _me ?? (_me = Players.ElementAt(InAction));
+            }
 
         private IEnumerable<Card> _ownCards;
 
@@ -64,12 +64,22 @@ namespace Nancy.Simple
         }
 
         private IEnumerable<IGrouping<Rank, Card>> _cardsByRank;
-
+        
         public IEnumerable<IGrouping<Rank, Card>> CardsByRank
         {
             get
             {
                 return _cardsByRank ?? (_cardsByRank = OwnCards.GroupBy(card => card.Rank));
+            }
+        }
+        
+        private IEnumerable<IGrouping<Suit, Card>> _cardsBySuit;
+
+        public IEnumerable<IGrouping<Suit, Card>> CardsBySuit
+        {
+            get
+            {
+                return _cardsBySuit ?? (_cardsBySuit = OwnCards.GroupBy(card => card.Suit));
             }
         }
 
@@ -84,14 +94,21 @@ namespace Nancy.Simple
 
         public bool HasThreeOfAKind()
         {
-            return _hasThreeOfAKind ?? (_hasThreeOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
+            return _hasThreeOfAKind ?? (_hasThreeOfAKind = CardsByRank.Any(group => group.Count() == 3)).Value;
         }
 
         private bool? _hasFourOfAKind;
 
         public bool HasFourOfAKind()
         {
-            return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
+            return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 4)).Value;
+        }
+
+        private bool? _hasFlush;
+
+        public bool HasFlush()
+        {
+            return _hasFlush ?? (_hasFlush = CardsBySuit.Any(group => group.Count() == 5)).Value;
         }
 
         /// <summary>

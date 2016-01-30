@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Decisions\AbstractPair.cs" />
     <Compile Include="Decisions\HighCardAfterFlop.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\GameState.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Data\Rank.cs" />
     <Compile Include="Data\Suit.cs" />
     <Compile Include="Decisions\PairBeforeFlop.cs" />
-    <Compile Include="Helpers.cs" />
     <Compile Include="Decisions\Pair.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />

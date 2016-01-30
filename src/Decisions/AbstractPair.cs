@@ -10,7 +10,7 @@ namespace Nancy.Simple.Decisions
 
         public abstract int? MakeADecision(GameState gameState);
 
-        protected int? GetBet(Rank rank)
+        protected int? GetBet(Rank rank, GameState gameState)
         {
             switch (rank)
             {
@@ -21,7 +21,7 @@ namespace Nancy.Simple.Decisions
                 case Rank.Queen:
                     return 60;
                 default:
-                    return 50;
+                    return gameState.GetValueToCall();
             }
         }
 

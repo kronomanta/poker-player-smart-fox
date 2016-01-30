@@ -29,7 +29,7 @@ namespace Nancy.Simple.Decisions
                 return null;
             }
 
-            return GetBet(hasAPair.Value);
+            return GetBet(hasAPair.Value, gameState);
         }
     }
 }

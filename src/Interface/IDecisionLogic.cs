@@ -4,6 +4,11 @@ namespace Nancy.Simple.Interface
 {
     public interface IDecisionLogic
     {
-        bool MakeADecision(JObject jObj);
+        /// <summary>
+        /// Eldönti, hogy akar-e megtenni tétet, és ha igen, akkor milyet
+        /// </summary>
+        /// <param name="gameState"></param>
+        /// <returns></returns>
+        int? MakeADecision(JObject gameState);
     }
 }

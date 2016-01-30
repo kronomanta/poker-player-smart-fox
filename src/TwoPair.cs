@@ -5,9 +5,10 @@ namespace Nancy.Simple
 {
     public class TwoPair : IDecisionLogic
     {
-        public bool MakeADecision(JObject jObj)
+        public int? MakeADecision(JObject jObj)
         {
-            return false;
+            //sosem játszik, nem tartozik még hozzá logika
+            return null;
         }
     }
 }

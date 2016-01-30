@@ -2,13 +2,14 @@
 
 namespace Nancy.Simple
 {
-    public class Decisions
+    public static class Decisions
     {
-        public IDecisionLogic[] GetDecisions()
+        public static IDecisionLogic[] GetDecisions()
         {
             var decisions = new IDecisionLogic[]
             {
                 new TwoPair(), 
+                new RandomBet(), 
             };
 
             return decisions;

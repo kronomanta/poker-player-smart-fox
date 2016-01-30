@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decisions.cs" />
+    <Compile Include="Randomness.cs" />
     <Compile Include="TwoPair.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />

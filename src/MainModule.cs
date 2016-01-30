@@ -22,7 +22,7 @@ namespace Nancy.Simple
 				var form = Request.Form;
 				string action = form ["action"];
                 Guid reqId = PokerPlayer.GenerateRequestId();
-                Console.Write("Incoming Request: aciton: {0}, reqId: {1}", action, reqId);
+                Console.WriteLine("Incoming Request: aciton: {0}, reqId: {1}", action, reqId);
 
 				switch (action) {
 				case "bet_request":

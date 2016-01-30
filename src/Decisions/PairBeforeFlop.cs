@@ -19,8 +19,7 @@ namespace Nancy.Simple.Decisions
                 //csak, ha még nincsenek terített lapok
                 if (gameState.CommunityCards.FirstOrDefault() == null)
                 {
-                    Card[] myCards = new Card [2];
-                    myCards = gameState.GetCurrentPlayer().HoleCards.ToArray();
+                    Card[] myCards = gameState.GetCurrentPlayer().HoleCards.ToArray();
                     if (myCards[0].Rank == myCards[1].Rank)
                         return 10000;
                     else return null;

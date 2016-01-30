@@ -2,7 +2,7 @@
 using System.Linq;
 using Nancy.Simple.Interface;
 
-namespace Nancy.Simple
+namespace Nancy.Simple.Decisions
 {
     public class RandomBet : IDecisionLogic
     {

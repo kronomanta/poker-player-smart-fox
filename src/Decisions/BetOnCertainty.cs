@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Nancy.Simple.Interface;
 
-namespace Nancy.Simple
+namespace Nancy.Simple.Decisions
 {
     class BetOnCertainty : IDecisionLogic
     {

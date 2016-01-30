@@ -34,10 +34,10 @@ namespace Nancy.Simple
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("ReqID: {0}, error: {1}",requestId, ex);
+                Logger.LogHelper.Error("type=error action=bet_request request_id={0} error_message={1}",requestId, ex);
             }
 
-            Console.WriteLine("ReqID: {0}, Bet: {1}", requestId, bet);
+            Logger.LogHelper.Log("type=bet action=bet_request request_id={0} bet={1}", requestId, bet);
             
 
             return bet;
@@ -52,7 +52,7 @@ namespace Nancy.Simple
 		    }
 		    catch (Exception ex)
 		    {
-		        Console.Error.WriteLine(ex);
+                Logger.LogHelper.Error("type=error action=showdown error_message={1} request_id={0}", requestId, ex);
 		    }
 		}
 	}

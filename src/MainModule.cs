@@ -9,6 +9,9 @@ namespace Nancy.Simple
 		public MainModule ()
 		{
 			Get ["/"] = _ => {
+				Logger.LogHelper.Log("type=incoming method=get");
+				Logger.LogHelper.Log("unexpected");
+
 				var contentBytes = Encoding.UTF8.GetBytes ("OK");
 				var response = new Response {
 					ContentType = "text/plain",
@@ -22,7 +25,7 @@ namespace Nancy.Simple
 				var form = Request.Form;
 				string action = form ["action"];
                 Guid reqId = PokerPlayer.GenerateRequestId();
-                Console.WriteLine("Incoming Request: aciton: {0}, reqId: {1}", action, reqId);
+                Logger.LogHelper.Log("type=incoming method=post action={0} request_id={1}", action, reqId);
 
 				switch (action) {
 				case "bet_request":

@@ -3,7 +3,7 @@ using Nancy.Simple.Interface;
 
 namespace Nancy.Simple.Decisions
 {
-    class BetOnCertainty : IDecisionLogic
+    public class BetOnCertainty : IDecisionLogic
     {
         public string GetName()
         {

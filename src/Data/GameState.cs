@@ -94,14 +94,14 @@ namespace Nancy.Simple
 
         public bool HasThreeOfAKind()
         {
-            return _hasThreeOfAKind ?? (_hasThreeOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
+            return _hasThreeOfAKind ?? (_hasThreeOfAKind = CardsByRank.Any(group => group.Count() == 3)).Value;
         }
 
         private bool? _hasFourOfAKind;
 
         public bool HasFourOfAKind()
         {
-            return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
+            return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 4)).Value;
         }
 
         private bool? _hasFlush;
@@ -110,7 +110,7 @@ namespace Nancy.Simple
         {
             return _hasFlush ?? (_hasFlush = CardsBySuit.Any(group => group.Count() == 5)).Value;
         }
-
+        
         /// <summary>
         /// Minimális összeg ahhoz, hogy tartsuk a tétet
         /// </summary>

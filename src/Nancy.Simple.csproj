@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decisions.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="HighCard.cs" />
     <Compile Include="TwoPair.cs" />
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />

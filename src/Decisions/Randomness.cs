@@ -32,14 +32,9 @@ namespace Nancy.Simple.Decisions
                 return valueToCall;
 
             int decision = rnd.Next(100);
-            if (decision < 20)
+            if (decision < 70)
             {
-                //20% eldob
-                bet = 0;
-            }
-            else if (decision < 70)
-            {
-                //50% tartom
+                //70% tartom
                 bet = valueToCall;
             }
             else

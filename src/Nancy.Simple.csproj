@@ -83,6 +83,7 @@
     <Compile Include="Data\Player.cs" />
     <Compile Include="Data\PlayerStatus.cs" />
     <Compile Include="PokerPlayer.cs" />
+    <Compile Include="Logger\LogHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -104,4 +105,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Logger\" />
+  </ItemGroup>
 </Project>

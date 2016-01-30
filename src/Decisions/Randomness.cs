@@ -29,7 +29,7 @@ namespace Nancy.Simple.Decisions
 
             //ha túl kevés a pénz, akkor dobunk mindig
             if (gameState.GetCurrentPlayer().Stack < StackLowerThreshold)
-                return 0;
+                return valueToCall;
 
             int decision = rnd.Next(100);
             if (decision < 20)
@@ -51,7 +51,7 @@ namespace Nancy.Simple.Decisions
                 if (bet >= CallThreshold)
                 {
                     //ha all in lenne belőle, akkor inkább bedobjuk
-                    bet = 0;
+                    bet = valueToCall;
                 }
             }
 

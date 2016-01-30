@@ -1,6 +1,6 @@
 ﻿using Nancy.Simple.Interface;
 
-namespace Nancy.Simple
+namespace Nancy.Simple.Decisions
 {
     public class TwoPair : IDecisionLogic
     {

@@ -23,7 +23,7 @@ namespace Nancy.Simple
             {
                 var parsedState = JsonConvert.DeserializeObject<GameState>(gameState.ToString());
 
-                foreach (IDecisionLogic decisionLogic in Decisions.GetDecisions())
+				foreach (IDecisionLogic decisionLogic in Decisions.DecisionFactory.GetDecisions())
                 {
                     //végigpróbáljuk a lehetőségeket
                     int? possibleBet = decisionLogic.MakeADecision(parsedState);

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Nancy.Simple.Interface;
+﻿using Nancy.Simple.Interface;
 
 namespace Nancy.Simple.Decisions
 {
@@ -13,7 +12,8 @@ namespace Nancy.Simple.Decisions
         public int? MakeADecision(GameState gameState)
         {
             if (gameState.HasFourOfAKind()
-                || gameState.HasPair() && gameState.HasThreeOfAKind())
+                || gameState.HasPair() && gameState.HasThreeOfAKind()
+                || gameState.HasFlush())
             {
                 return 100000;
             }

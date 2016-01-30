@@ -73,6 +73,16 @@ namespace Nancy.Simple
             }
         }
 
+        private IEnumerable<IGrouping<Suit, Card>> _cardsBySuit;
+
+        public IEnumerable<IGrouping<Suit, Card>> CardsBySuit
+        {
+            get
+            {
+                return _cardsBySuit ?? (_cardsBySuit = OwnCards.GroupBy(card => card.Suit));
+            }
+        }
+
         private bool? _hasPair;
 
         public bool HasPair()
@@ -92,6 +102,13 @@ namespace Nancy.Simple
         public bool HasFourOfAKind()
         {
             return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 2)).Value;
+        }
+
+        private bool? _hasFlush;
+
+        public bool HasFlush()
+        {
+            return _hasFlush ?? (_hasFlush = CardsBySuit.Any(group => group.Count() == 5)).Value;
         }
 
         /// <summary>

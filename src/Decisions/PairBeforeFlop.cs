@@ -21,7 +21,7 @@ namespace Nancy.Simple.Decisions
                 {
                     Card[] myCards = gameState.GetCurrentPlayer().HoleCards.ToArray();
                     if (myCards[0].Rank == myCards[1].Rank)
-                        return 10000;
+                        return 300;
                     else return null;
                 }
                 else return null;

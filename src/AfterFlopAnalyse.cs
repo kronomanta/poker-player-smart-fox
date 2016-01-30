@@ -40,7 +40,7 @@ namespace Nancy.Simple
             if (IsHigherThanFlop == true)
                 return 1;
             else
-                return 0;
+                return null;
 
         }
 

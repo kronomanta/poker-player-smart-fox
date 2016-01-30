@@ -27,12 +27,6 @@ namespace Nancy.Simple.Decisions
                 else return null;
           
 
-            
-
-
-            
-
-        }
 
         }
 

@@ -15,13 +15,13 @@ namespace Nancy.Simple.Decisions
             switch (rank)
             {
                 case Rank.Ace:
-                    return 100;
+                    return 500;
                 case Rank.King:
-                    return 80;
+                    return 400;
                 case Rank.Queen:
-                    return 60;
+                    return 300;
                 default:
-                    return gameState.GetValueToCall();
+                    return 100;
             }
         }
 

@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetOnCertainty.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\GameState.cs" />
     <Compile Include="Data\Player.cs" />

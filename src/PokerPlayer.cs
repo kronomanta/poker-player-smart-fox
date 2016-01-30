@@ -18,12 +18,13 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject jsonState)
 		{
-		    int bet = 0;
-			string actualDecision = "none";
-			var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
-
             try
-            {
+			{
+				int bet = 0;
+				string actualDecision = "none";
+				var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
+				Logger.LogHelper.Log("type=bet_begin action=bet_request request_id={0} game_id={1}", requestId, gameState.GameId);
+
 				foreach (IDecisionLogic decisionLogic in Decisions.DecisionFactory.GetDecisions())
                 {
                     //végigpróbáljuk a lehetőségeket
@@ -34,22 +35,23 @@ namespace Nancy.Simple
 						actualDecision = decisionLogic.GetName();
                         break;
                     }
-                }
+				}
+
+				string cards = String.Join(",", gameState.OwnCards);
+				Logger.LogHelper.Log("type=bet action=bet_request request_id={0} game_id={1} bet={2} cards={3} decision={4}",
+					requestId, gameState.GameId, bet, cards, actualDecision);
+
+				return bet;
             }
             catch (Exception ex)
             {
-                Logger.LogHelper.Error("type=error action=bet_request request_id={0} error_message={1}",requestId, ex);
+				Logger.LogHelper.Error("type=error action=bet_request request_id={0} game_id={1} error_message={2}",requestId, gameState.GameId, ex);
             }
-
-			string cards = String.Join(",", gameState.OwnCards);
-			Logger.LogHelper.Log("type=bet action=bet_request request_id={0} game_id={1} bet={2} cards={3} decision={4}",
-				requestId, gameState.GameId, bet, cards, actualDecision);
-            
-            return bet;
 		}
 
-		public static void ShowDown(JObject gameState)
+		public static void ShowDown(JObject jsonState)
 		{
+			var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
 			//TODO: Use this method to showdown
 		    try
 		    {
@@ -57,7 +59,7 @@ namespace Nancy.Simple
 		    }
 		    catch (Exception ex)
 		    {
-                Logger.LogHelper.Error("type=error action=showdown error_message={1} request_id={0}", requestId, ex);
+				Logger.LogHelper.Error("type=error action=showdown request_id={0} game_id={1} error_message={2}", requestId, gameState.GameId, ex);
 		    }
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using Nancy.Simple.Interface;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nancy.Simple
@@ -18,6 +19,8 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject gameState)
 		{
+            var parsedState = JsonConvert.DeserializeObject<GameState>(gameState.ToString());
+
 		    int bet = 0;
             try
             {
@@ -26,10 +29,10 @@ namespace Nancy.Simple
                     //végigpróbáljuk a lehetőségeket
                     int? possibleBet = decisionLogic.MakeADecision(gameState);
                     if (possibleBet.HasValue)
-                    {
+                {
                         bet = possibleBet.Value;
                         break;
-                    }
+                }
                 }
             }
             catch (Exception ex)

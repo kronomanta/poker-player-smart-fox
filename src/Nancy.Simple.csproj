@@ -70,6 +70,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Card.cs" />
+    <Compile Include="Data\GameState.cs" />
+    <Compile Include="Data\Rank.cs" />
+    <Compile Include="Data\Suit.cs" />
     <Compile Include="Decisions.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="HighCard.cs" />
@@ -78,6 +82,8 @@
     <Compile Include="Interface\IDecisionLogic.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="Data\Player.cs" />
+    <Compile Include="Data\PlayerStatus.cs" />
     <Compile Include="PokerPlayer.cs" />
     <Compile Include="Logger\LogHelper.cs" />
   </ItemGroup>

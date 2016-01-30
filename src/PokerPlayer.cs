@@ -19,7 +19,7 @@ namespace Nancy.Simple
 		public static int BetRequest(JObject gameState)
 		{
 		    int bet = 0;
-			string actualDecision;
+			string actualDecision = "none";
             try
             {
                 var parsedState = JsonConvert.DeserializeObject<GameState>(gameState.ToString());

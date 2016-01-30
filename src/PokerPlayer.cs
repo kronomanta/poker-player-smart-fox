@@ -5,6 +5,13 @@ namespace Nancy.Simple
 {
 	public static class PokerPlayer
 	{
+	    private static Guid requestId = Guid.NewGuid();
+        public static Guid RequestId {get { return requestId; }}
+	    public static Guid GenerateRequestId()
+	    {
+	        return (requestId = Guid.NewGuid());
+	    }
+
         private static readonly Random rnd = new Random();
 
 		public static readonly string VERSION = "Default C# folding player";
@@ -38,10 +45,10 @@ namespace Nancy.Simple
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex);
+                Console.Error.WriteLine("ReqID: {0}, error: {1}",requestId, ex);
             }
 
-            Console.WriteLine("Bet: {0}", bet);
+            Console.WriteLine("ReqID: {0}, Bet: {1}", requestId, bet);
             
 
             return bet;

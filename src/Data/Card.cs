@@ -11,6 +11,11 @@ namespace Nancy.Simple
 
         [JsonConverter(typeof(SuitConverter))]
         [JsonProperty("suit")]
-        public Suit Suit { get; set; }
+		public Suit Suit { get; set; }
+
+		public override string ToString()
+		{
+			return Suit.ToString() + (int)Rank;
+		}
     }
 }

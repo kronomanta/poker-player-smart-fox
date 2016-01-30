@@ -21,7 +21,7 @@ namespace Nancy.Simple
 		    int bet = 0;
 			string actualDecision = "none";
 			var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
-			var player = gameState.GetCurrentPlayer();
+
             try
             {
 				foreach (IDecisionLogic decisionLogic in Decisions.DecisionFactory.GetDecisions())

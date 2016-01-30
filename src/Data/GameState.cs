@@ -83,34 +83,54 @@ namespace Nancy.Simple
             }
         }
 
-        private bool? _hasPair;
+        private IEnumerable<IEnumerable<Card>> _getPairs;
+
+        public IEnumerable<IEnumerable<Card>> GetPairs()
+        {
+            return _getPairs ?? (_getPairs = CardsByRank.Where(group => group.Count() == 2));
+        }
+
+        private IEnumerable<IEnumerable<Card>> _getThreeOfAKinds;
+
+        public IEnumerable<IEnumerable<Card>> GetThreeOfAKinds()
+        {
+            return _getThreeOfAKinds ?? (_getThreeOfAKinds = CardsByRank.Where(group => group.Count() == 3));
+        }
+
+        private IEnumerable<IEnumerable<Card>> _getFourOfAKinds;
+
+        public IEnumerable<IEnumerable<Card>> GetFourOfAKinds()
+        {
+            return _getFourOfAKinds ?? (_getFourOfAKinds = CardsByRank.Where(group => group.Count() == 4));
+        }
+
+        private IEnumerable<IEnumerable<Card>> _getFlushes;
+
+        public IEnumerable<IEnumerable<Card>> GetFlushes()
+        {
+            return _getFlushes ?? (_getFlushes = CardsBySuit.Where(group => group.Count() == 5));
+        }
 
         public bool HasPair()
         {
-            return _hasPair ?? (_hasPair = CardsByRank.Any(group => group.Count() == 2)).Value;
+            return GetPairs().Any();
         }
-
-        private bool? _hasThreeOfAKind;
 
         public bool HasThreeOfAKind()
         {
-            return _hasThreeOfAKind ?? (_hasThreeOfAKind = CardsByRank.Any(group => group.Count() == 3)).Value;
+            return GetThreeOfAKinds().Any();
         }
-
-        private bool? _hasFourOfAKind;
 
         public bool HasFourOfAKind()
         {
-            return _hasFourOfAKind ?? (_hasFourOfAKind = CardsByRank.Any(group => group.Count() == 4)).Value;
+            return GetFourOfAKinds().Any();
         }
-
-        private bool? _hasFlush;
 
         public bool HasFlush()
         {
-            return _hasFlush ?? (_hasFlush = CardsBySuit.Any(group => group.Count() == 5)).Value;
+            return GetFlushes().Any();
         }
-        
+
         /// <summary>
         /// Minimális összeg ahhoz, hogy tartsuk a tétet
         /// </summary>

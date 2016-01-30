@@ -11,7 +11,7 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject gameState)
 		{
-		    int valueToCall = (int) gameState["current_buy_in"] - (int) gameState["players"]["in_action"]["bet"];
+		    var valueToCall = (int) gameState["current_buy_in"] - (int) gameState["players"]["in_action"]["bet"];
 
             //50% eséllyel csak tartjuk a tétet, egyébként pedig all in :D 
 		    if (rnd.Next(1) == 1)

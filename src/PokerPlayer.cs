@@ -18,11 +18,11 @@ namespace Nancy.Simple
 
 		public static int BetRequest(JObject jsonState)
 		{
+			int bet = 0;
+			var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
             try
 			{
-				int bet = 0;
 				string actualDecision = "none";
-				var gameState = JsonConvert.DeserializeObject<GameState>(jsonState.ToString());
 				Logger.LogHelper.Log("type=bet_begin action=bet_request request_id={0} game_id={1}", requestId, gameState.GameId);
 
 				foreach (IDecisionLogic decisionLogic in Decisions.DecisionFactory.GetDecisions())
@@ -40,13 +40,13 @@ namespace Nancy.Simple
 				string cards = String.Join(",", gameState.OwnCards);
 				Logger.LogHelper.Log("type=bet action=bet_request request_id={0} game_id={1} bet={2} cards={3} decision={4}",
 					requestId, gameState.GameId, bet, cards, actualDecision);
-
-				return bet;
             }
             catch (Exception ex)
             {
 				Logger.LogHelper.Error("type=error action=bet_request request_id={0} game_id={1} error_message={2}",requestId, gameState.GameId, ex);
             }
+
+			return bet;
 		}
 
 		public static void ShowDown(JObject jsonState)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -45,6 +46,43 @@ namespace Nancy.Simple
 
         [JsonProperty("community_cards")]
         public IEnumerable<Card> CommunityCards { get; set; }
+
+        private Player _me;
+        
+        public Player Me
+        {
+            get
+            {
+                return _me ?? (_me = Players.ElementAt(InAction));
+            }
+        }
+
+        private IEnumerable<Card> _ownCards;
+
+        public IEnumerable<Card> OwnCards
+        {
+            get
+            {
+                return _ownCards ?? (_ownCards = CommunityCards.Concat(Me.HoleCards));
+            }
+        }
+
+        private IEnumerable<IGrouping<Rank, Card>> _cardsByRank;
+        
+        public IEnumerable<IGrouping<Rank, Card>> CardsByRank
+        {
+            get
+            {
+                return _cardsByRank ?? (_cardsByRank = OwnCards.GroupBy(card => card.Rank));
+            }
+        }
+        
+        private bool? _hasPair;
+
+        public bool HasPair()
+        {
+            return _hasPair ?? (_hasPair = CardsByRank.Any(group => group.Count() == 2)).Value;
+        }
 
         public Player GetCurrentPlayer()
         {

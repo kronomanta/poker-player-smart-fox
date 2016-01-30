@@ -6,6 +6,11 @@ namespace Nancy.Simple.Decisions
 {
     public class DontRisk : IDecisionLogic
     {
+        public string GetName()
+        {
+            return "DontRisk";
+        }
+
         /// <summary>
         /// Ha még nincs bent pénzünk, foldol
         /// </summary>

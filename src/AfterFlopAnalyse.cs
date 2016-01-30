@@ -9,6 +9,11 @@ namespace Nancy.Simple
 {
     class AfterFlopAnalyse : IDecisionLogic
     {
+        public string GetName()
+        {
+            return "AfterFlopAnalyse";
+        }
+
         public int? MakeADecision(GameState gameState)
         {
             //csak, ha már vannak terített lapok

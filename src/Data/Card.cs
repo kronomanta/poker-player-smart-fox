@@ -3,11 +3,13 @@
 namespace Nancy.Simple
 {
     [JsonObject]
-    class Card
+    public class Card
     {
+        [JsonConverter(typeof(RankConverter))]
         [JsonProperty("rank")]
         public Rank Rank { get; set; }
 
+        [JsonConverter(typeof(SuitConverter))]
         [JsonProperty("suit")]
         public Suit Suit { get; set; }
     }

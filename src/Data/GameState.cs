@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nancy.Simple
 {
     [JsonObject]
-    class GameState
+    public class GameState
     {
         [JsonProperty("tournament_id")]
         public string TournamentId { get; set; }

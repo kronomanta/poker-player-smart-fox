@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nancy.Simple
 {
     [JsonObject]
-    class Player
+    public class Player
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -11,6 +13,7 @@ namespace Nancy.Simple
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonConverter(typeof(PlayerStatusConverter))]
         [JsonProperty("status")]
         public PlayerStatus Status { get; set; }
 
@@ -22,5 +25,13 @@ namespace Nancy.Simple
 
         [JsonProperty("bet")]
         public int Bet { get; set; }
+
+        [JsonProperty("hole_cards")]
+        public IEnumerable<Card> HoleCards { get; set; }
+
+        public Player()
+        {
+            this.HoleCards = Enumerable.Empty<Card>();
+        }
     }
 }
